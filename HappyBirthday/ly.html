@@ -26,17 +26,20 @@
       var canvas = document.getElementById('canvas');
       var ctx = canvas.getContext('2d');
       var balls = [];
-      var count = 50;
+      var count = 20;
       var colorList = ['#fc5185', '#ffd166', '#06d6a0', '#118ab2', '#073b4c', '#8338ec'];
 
       // 设置画布宽度和高度
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      count = canvas.width/50 + canvas.height/50;
 
       // 监听窗口变化事件，并重新设置画布宽度和高度
       window.addEventListener('resize', function() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+        count = canvas.width/50 + canvas.height/50;
+        drawBall();
       });
 
       // 定义球体类
@@ -86,16 +89,20 @@
       }
 
       // 创建球体对象
-      for (var i = 0; i < count; i++) {
-        var x = Math.random() * canvas.width;
-        var y = Math.random() * canvas.height;
-        var radius = Math.random() * 40 + 10;
-        var color = colorList[Math.floor(Math.random() * colorList.length)];
-        var speedX = Math.random() * 5 - 2.5;
-        var speedY = Math.random() * 5 - 2.5;
-        var ball = new Ball(x, y, radius, color, speedX, speedY);
-        balls.push(ball);
+      function drawBall(){
+        balls = [];
+        for (var i = 0; i < count; i++) {
+            var x = Math.random() * canvas.width;
+            var y = Math.random() * canvas.height;
+            var radius = Math.random() * 40 + 10;
+            var color = colorList[Math.floor(Math.random() * colorList.length)];
+            var speedX = Math.random() * 5 - 2.5;
+            var speedY = Math.random() * 5 - 2.5;
+            var ball = new Ball(x, y, radius, color, speedX, speedY);
+            balls.push(ball);
+          };
       }
+      drawBall();
 
       var textArr = [
       {text: 'Happy', size: 80, x0: 0, y0: 0, angle: -Math.PI / 4, speed: 0.15},
